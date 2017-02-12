@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:myview3="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.tangcco.android.TangccoAndroid030_41.view.MyView3
+        android:id="@+id/myView1"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:textColor="#ff00ff"
+        android:src="@drawable/ic_launcher"
+        myview3:Text="@string/mytextview"
+        myview3:TextSize="60sp"/>
+</LinearLayout>

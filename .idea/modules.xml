@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ImageScan/ImageScan.iml" filepath="$PROJECT_DIR$/ImageScan/ImageScan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Kuangjia/Kuangjia.iml" filepath="$PROJECT_DIR$/Kuangjia/Kuangjia.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyView02/MyView02.iml" filepath="$PROJECT_DIR$/MyView02/MyView02.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Tangcco170205_Ftp.iml" filepath="$PROJECT_DIR$/Tangcco170205_Ftp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myview01/myview01.iml" filepath="$PROJECT_DIR$/myview01/myview01.iml" />
+    </modules>
+  </component>
+</project>

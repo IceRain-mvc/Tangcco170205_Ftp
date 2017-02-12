@@ -1,0 +1,62 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tangcco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <com.tangcco.android.TangccoAndroid030_41.view.RoundImageView
+            android:id="@+id/id_qiqiu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/qiqiu" >
+        </com.tangcco.android.TangccoAndroid030_41.view.RoundImageView>
+
+        <com.tangcco.android.TangccoAndroid030_41.view.RoundImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/aa" >
+        </com.tangcco.android.TangccoAndroid030_41.view.RoundImageView>
+
+        <com.tangcco.android.TangccoAndroid030_41.view.RoundImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/icon" >
+        </com.tangcco.android.TangccoAndroid030_41.view.RoundImageView>
+
+        <com.tangcco.android.TangccoAndroid030_41.view.RoundImageView
+            android:id="@+id/id_meinv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/aa"
+            tangcco:borderRadius="20dp"
+            tangcco:type="round" >
+        </com.tangcco.android.TangccoAndroid030_41.view.RoundImageView>
+
+        <com.tangcco.android.TangccoAndroid030_41.view.RoundImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/icon"
+            tangcco:borderRadius="40dp"
+            tangcco:type="round" >
+        </com.tangcco.android.TangccoAndroid030_41.view.RoundImageView>
+
+        <com.tangcco.android.TangccoAndroid030_41.view.RoundImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:src="@drawable/qiqiu"
+            tangcco:borderRadius="60dp"
+            tangcco:type="round" >
+        </com.tangcco.android.TangccoAndroid030_41.view.RoundImageView>
+    </LinearLayout>
+
+</ScrollView>

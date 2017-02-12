@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 行布局文件 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="70dip"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 显示视频图片 -->
+        <ImageView
+            android:id="@+id/iv_video_thumbnail"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_margin="5dip" />
+        <!-- 把文件名和文件大小包裹为一个整体，显示图片的右侧 -->
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dip"
+            android:layout_margin="5dip"
+            android:layout_toRightOf="@id/iv_video_thumbnail">
+
+            <!-- 显示视频的文件名 -->
+
+            <TextView
+                android:id="@+id/tv_video_name"
+                style="@style/textViewStyle" />
+            <!-- 在显示视频文件名的下面显示视频文件大小 -->
+
+            <TextView
+                android:id="@+id/tv_video_size"
+                style="@style/textViewStyle"
+                android:layout_below="@id/tv_video_name" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:background="#FFFF0000"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="删除"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

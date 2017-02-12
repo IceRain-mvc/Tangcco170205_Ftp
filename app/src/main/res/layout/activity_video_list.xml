@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_video_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.tangcco170205_ftp.player.SlideCutListView
+        android:id="@+id/mListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@raw/list_divider" />
+
+    <RelativeLayout
+        android:id="@+id/rela_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:id="@+id/empty_iamge"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_no_actives" />
+        <TextView
+            android:textSize="20sp"
+            android:text="暂无数据"
+            android:gravity="center"
+            android:layout_below="@id/empty_iamge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</RelativeLayout>
+

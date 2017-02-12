@@ -1,0 +1,1 @@
+include ':app', ':myview01', ':ImageScan', ':MyView02', ':Kuangjia'

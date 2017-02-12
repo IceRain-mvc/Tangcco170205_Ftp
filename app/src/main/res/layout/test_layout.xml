@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <!--<tv.fuyin.android.views.HeadView_-->
+        <!--android:id="@id/headView"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="54.0dip"-->
+            <!--android:focusable="true"-->
+            <!--android:focusableInTouchMode="true">-->
+
+            <!--<EditText-->
+                <!--android:id="@id/searchEditText"-->
+                <!--style="@style/app_text_30_666666"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="14.0dip"-->
+                <!--android:layout_marginRight="14.0dip"-->
+                <!--android:background="@drawable/bg_bottom_search_input"-->
+                <!--android:hint="请输入关键词"-->
+                <!--android:paddingLeft="36.0dip"-->
+                <!--android:singleLine="true"-->
+                <!--android:textColorHint="#ff999999" />-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="23.0dip"-->
+                <!--android:src="@drawable/icon_bottom_search" />-->
+        <!--</RelativeLayout>-->
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:background="@color/gray">-->
+
+            <!--<GridView-->
+                <!--android:id="@id/gridview"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="fill_parent"-->
+                <!--android:background="@color/gray"-->
+                <!--android:columnWidth="@dimen/grid_item_width"-->
+                <!--android:gravity="center"-->
+                <!--android:horizontalSpacing="1.0dip"-->
+                <!--android:numColumns="auto_fit"-->
+                <!--android:paddingBottom="9.0dip"-->
+                <!--android:paddingTop="9.0dip"-->
+                <!--android:stretchMode="spacingWidthUniform"-->
+                <!--android:verticalSpacing="8.0dip" />-->
+
+            <!--<tv.fuyin.android.views.ProgressBarCircular-->
+                <!--android:id="@id/progressBarCircular"-->
+                <!--android:layout_width="36.0dip"-->
+                <!--android:layout_height="36.0dip"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:textSize="24.0sp"-->
+                <!--android:visibility="gone" />-->
+        <!--</RelativeLayout>-->
+    <!--</LinearLayout>-->
+</LinearLayout>

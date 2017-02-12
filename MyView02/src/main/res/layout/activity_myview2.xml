@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="200dp"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:text="第二个TextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="98dp"
+        android:id="@+id/textView" />
+
+    <com.tangcco.android.TangccoAndroid030_41.view.MyView2
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/myView2">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#ffff00"
+            android:gravity="center"
+            android:text="第一个TextView" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#ff00ff"
+            android:gravity="center"
+            android:text="第三个TextView" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="200dp"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:text="第四个TextView" />
+    </com.tangcco.android.TangccoAndroid030_41.view.MyView2>
+</RelativeLayout>

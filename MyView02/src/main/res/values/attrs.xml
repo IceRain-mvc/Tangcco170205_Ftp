@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyView3">
+        <attr name="Text" format="reference|string"></attr>
+        <attr name="TextSize" format="reference|dimension"></attr>
+        <attr name="android:textColor" />
+        <attr name="android:src"/>
+    </declare-styleable>
+
+    <!--RoundImageView-->
+    <attr name="borderRadius" format="dimension" />
+    <attr name="type">
+        <enum name="circle" value="0" />
+        <enum name="round" value="1" />
+    </attr>
+    <declare-styleable name="RoundImageView">
+        <attr name="borderRadius" />
+        <attr name="type" />
+    </declare-styleable>
+</resources>
