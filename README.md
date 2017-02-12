@@ -28,7 +28,7 @@
         this.list = new ArrayList<FTPFile>();
     }
   ```
-  ### 第二步 打开连接
+  ## 第二步 打开连接
   ```
   /**
      * 打开FTP服务.
@@ -116,8 +116,7 @@
 
 ```
 
-## 上传核心代码
-
+## 上传源码分析
 ```
 
     protected boolean _storeFile(String command, String remote, InputStream local) throws IOException {
