@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 
-public class VideoListActivity extends AppCompatActivity implements FileUtils.IGetData, SlideCutListView.RemoveListener {
+public class VideoListActivity extends AppCompatActivity implements FileUtils.IGetDataVideo, SlideCutListView.RemoveListener {
 
     Runnable runnable = new Runnable() {
         public void run() {
@@ -43,7 +43,7 @@ public class VideoListActivity extends AppCompatActivity implements FileUtils.IG
         mListView = (SlideCutListView) findViewById(R.id.mListView);
         FileUtils fileUtils = new FileUtils();
         //回调
-        fileUtils.setGetData(this);
+        fileUtils.setDataVideo(this);
 
         adapter = new MyAdapter(this, videoInfos);
         mListView.setAdapter(adapter);

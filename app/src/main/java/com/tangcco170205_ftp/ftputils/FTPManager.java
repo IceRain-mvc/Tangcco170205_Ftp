@@ -6,7 +6,6 @@ import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -25,7 +24,7 @@ public class FTPManager {
     /**
      * FTP根目录.
      */
-    public static final String REMOTE_PATH = "/web/zhangwanting";
+    public static final String REMOTE_PATH = "/web/me";
     /**
      * 服务器名.
      */
@@ -55,7 +54,6 @@ public class FTPManager {
      * 统计流量.
      */
     private double response;
-    private String ext;
 
     /**
      * 构造函数.
@@ -253,8 +251,7 @@ public class FTPManager {
      * @return ResultBean
      * @throws IOException
      */
-    public ResultBean uploading(File localFile, String remotePath, String ext) throws IOException {
-        this.ext = ext;
+    public ResultBean uploading(File localFile, String remotePath,boolean isDelete) throws IOException {
         boolean flag = true;
         ResultBean resultBean = null;
         // 初始化FTP当前目录
@@ -271,12 +268,14 @@ public class FTPManager {
         ftpClient.changeWorkingDirectory(REMOTE_PATH);
         // 获取上传前时间
         Date startTime = new Date();
-        if (localFile.isDirectory()) {
-            // 上传多个文件
-            flag = uploadingMany(localFile);
-        } else {
-            // 上传单个文件
-            flag = uploadingSingle(localFile);
+        synchronized (this) {
+            if (localFile.isDirectory()) {
+                // 上传多个文件
+                flag = uploadingMany(localFile,isDelete);
+            } else {
+                // 上传单个文件
+                flag = uploadingSingle(localFile);
+            }
         }
         // 获取上传后时间
         Date endTime = new Date();
@@ -310,11 +309,12 @@ public class FTPManager {
      * 上传多个文件.
      *
      * @param localFile 本地文件夹
+     * @param isDelete
      * @return true上传成功, false上传失败
      * @throws IOException
      */
-    private boolean uploadingMany(File localFile) throws IOException {
-        boolean flag = true;
+    private boolean uploadingMany(File localFile, boolean isDelete) throws IOException {
+        boolean flag = false;
 
         // FTP当前目录
         if (!currentPath.equals(REMOTE_PATH)) {
@@ -323,35 +323,26 @@ public class FTPManager {
             currentPath = currentPath + localFile.getName();
         }
         // FTP下创建文件夹
-        ftpClient.makeDirectory(currentPath);
+        ftpClient.makeDirectory(REMOTE_PATH);
         // 更改FTP目录
-        ftpClient.changeWorkingDirectory(currentPath);
-
-        FileFilter filterFilter = new FileFilter() {
-
-            @Override
-            public boolean accept(File file) {
-//                ext = "jpg|png";
-                return file.isDirectory() ||
-                        file.getName().matches("^.*?\\.(" + ext + ")$"); //   .mp4,   .3gp
-            }
-        };
+        ftpClient.changeWorkingDirectory(REMOTE_PATH);
 
         // 得到当前目录下所有文件
-        File[] files = localFile.listFiles(filterFilter);
+        File[] files = localFile.listFiles();
         // 遍历得到每个文件并上传
 
-        synchronized (this) {
-            for (File file : files) {
-                if (file.isHidden()) {
-                    continue;
-                }
-                if (file.isDirectory()) {
-                    // 上传多个文件
-                    flag = uploadingMany(file);
-                } else {
-                    // 上传单个文件
-                    flag = uploadingSingle(file);
+        for (File file : files) {
+            if (file.isHidden()) {
+                continue;
+            }
+            if (file.isDirectory()) {
+                // 上传多个文件
+                flag = uploadingMany(file, isDelete);
+            } else {
+                // 上传单个文件
+                flag = uploadingSingle(file);
+                if (isDelete && flag) {
+                    file.delete();
                 }
             }
         }

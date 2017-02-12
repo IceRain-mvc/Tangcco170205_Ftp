@@ -1,5 +1,6 @@
 package com.tangcco170205_ftp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +20,7 @@ import com.tangcco170205_ftp.fragment.GroupsFragment;
 import com.tangcco170205_ftp.fragment.HomeFragment;
 import com.tangcco170205_ftp.fragment.ListsFragment;
 import com.tangcco170205_ftp.fragment.ProfileFragment;
+import com.tangcco170205_ftp.service.MyService;
 import com.tangcco170205_ftp.utils.FloatUtils;
 
 import butterknife.Bind;
@@ -62,6 +64,8 @@ public class HomeActivity extends AppCompatActivity {
         setupFloatingActionButton();
         //
         switchFragment(R.id.home);
+        //启动服务
+        startService(new Intent(this, MyService.class));
     }
     private void setupNavigationView(Toolbar toolbar) {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name, R.string.app_name);

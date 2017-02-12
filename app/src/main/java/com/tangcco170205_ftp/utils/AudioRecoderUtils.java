@@ -1,7 +1,6 @@
 package com.tangcco170205_ftp.utils;
 
 import android.media.MediaRecorder;
-import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
@@ -33,7 +32,7 @@ public class AudioRecoderUtils {
     public AudioRecoderUtils(){
 
         //默认保存路径为/sdcard/record/下
-        this(Environment.getExternalStorageDirectory()+"/record/");
+        this(FileUtils.getSDPath(true) + "/record/");
     }
 
     public AudioRecoderUtils(String filePath) {
