@@ -210,4 +210,9 @@ public static final long copyStream(InputStream source, OutputStream dest, int b
     }
 ```
 ## 但是不知道大家有没有发现一个问题 并没有线程同步 所以再使用的时候注意加上线程同步
-[源码下载](http://note.youdao.com/)
+
+
+
+
+
+
