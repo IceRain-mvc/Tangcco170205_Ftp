@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.tangcco170205_ftp.fragment.GroupVaqueroListFragment;
-import com.tangcco170205_ftp.fragment.HomeFragment;
+import com.tangcco170205_ftp.ui.fragment.GroupVaqueroListFragment;
+import com.tangcco170205_ftp.ui.fragment.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;

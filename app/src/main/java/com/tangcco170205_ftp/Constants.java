@@ -18,6 +18,9 @@ public class Constants {
     public static String hostName = "103.239.75.176";
     private static boolean sdCardExist;
     private static String dirName;
+    public final static String BASEURL = "http://webapi.tv.cnfuyin.net:7744/index.php";
+    public final static String ALLDATA = "?m=tool";
+
 
 
     public static String sdPath(Context context) {//TODO 设置存储目录

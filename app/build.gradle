@@ -35,4 +35,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.1.0'
     compile 'com.jakewharton:butterknife:7.0.0'
     compile files('libs/universal-image-loader-1.9.5.jar')
+    compile files('libs/gson-2.2.1.jar')
+    compile files('libs/okhttp-2.7.0.jar')
+    compile files('libs/okio-1.6.0.jar')
+    compile files('libs/eventbus.jar')
 }

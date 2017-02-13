@@ -8,6 +8,10 @@
         <item name="android:windowBackground">@null</item>
     </style>
 
+    <style name="StartStyle" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/start_window</item>
+    </style>
+
     <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/mt_gray3</item>
         <item name="android:textSize">18sp</item>
@@ -38,4 +42,13 @@
         <item name="android:textColor">@color/deepyellow</item>
     </style>
 
+    <!--grid的item字体样式-->
+    <style name="app_text_24_666666">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#ff666666</item>
+    </style>
+    <style name="app_text_18_999999">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#ff999999</item>
+    </style>
 </resources>

@@ -248,6 +248,7 @@ public class FTPManager {
      *
      * @param localFile  本地文件
      * @param remotePath FTP目录
+     * @param isDelete  上传之后是否删除
      * @return ResultBean
      * @throws IOException
      */

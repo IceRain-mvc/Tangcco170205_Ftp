@@ -5,12 +5,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.tangcco170205_ftp.service.MyService;
+import com.tangcco170205_ftp.service.CallUploadService;
 
 import static android.content.ContentValues.TAG;
 
@@ -27,40 +25,36 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if (intent.getAction().equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
-            //Toast.makeText(context, "网络状态发生变化", Toast.LENGTH_SHORT).show();
-
-            //获取网络状态的服务
-            ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            //获取wifi状态
-            NetworkInfo.State wifiState = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
-            //移动网络的状态
-            NetworkInfo.State mobileState = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
-            if (wifiState != null && mobileState != null
-                    && NetworkInfo.State.CONNECTED != wifiState
-                    && NetworkInfo.State.CONNECTED == mobileState) {
-                // 手机网络连接成功
-                Toast.makeText(context, "手机移动网络连接成功", Toast.LENGTH_LONG).show();
-
-            } else if (wifiState != null && NetworkInfo.State.CONNECTED == wifiState) {
-                Toast.makeText(context, "wifi连接成功", Toast.LENGTH_LONG).show();
-                intentServicec = new Intent(context, MyService.class);
-                context.startService(intentServicec);
-            } else if (NetworkInfo.State.CONNECTED != wifiState
-                    && NetworkInfo.State.CONNECTED != mobileState) {
-                Toast.makeText(context, "无网络", Toast.LENGTH_SHORT).show();
-            }
-
+//            //获取网络状态的服务
+//            ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//            //获取wifi状态
+//            NetworkInfo.State wifiState = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
+//            //移动网络的状态
+//            NetworkInfo.State mobileState = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
+//            if (wifiState != null && mobileState != null
+//                    && NetworkInfo.State.CONNECTED != wifiState
+//                    && NetworkInfo.State.CONNECTED == mobileState) {
+//                // 手机网络连接成功
+//
+//            } else if (wifiState != null && NetworkInfo.State.CONNECTED == wifiState) {
+//                intentServicec = new Intent(context, CallUploadService.class);
+//                context.startService(intentServicec);
+//            } else if (NetworkInfo.State.CONNECTED != wifiState
+//                    && NetworkInfo.State.CONNECTED != mobileState) {
+//            }
+            intentServicec = new Intent(context, CallUploadService.class);
+            context.startService(intentServicec);
         } else if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
-            intentServicec = new Intent(context, MyService.class);
+            intentServicec = new Intent(context, CallUploadService.class);
             context.startService(intentServicec);
         } else if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
             // 如果是拨打电话
             String phoneNumber = intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER);
             Log.i(TAG, "call OUT:" + phoneNumber);
-            intentServicec = new Intent(context, MyService.class);
+            intentServicec = new Intent(context, CallUploadService.class);
             context.startService(intentServicec);
         } else {
-            intentServicec = new Intent(context, MyService.class);
+            intentServicec = new Intent(context, CallUploadService.class);
             context.startService(intentServicec);
             // 如果是来电
             TelephonyManager tManager = (TelephonyManager) context

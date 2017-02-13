@@ -1,6 +1,7 @@
 package com.tangcco.android.TangccoAndroid030_41.view;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -81,8 +82,8 @@ public class MyView4 extends EditText {
         if (imgDel != null && event.getAction() == MotionEvent.ACTION_UP) {
 //            int eventX = (int) event.getRawX();
 //            int eventY = (int) event.getRawY();
-//            Rect rect = new Rect();
-//            getGlobalVisibleRect(rect);
+            Rect rect = new Rect();
+            getGlobalVisibleRect(rect);
 //            rect.left = rect.right - 150;
 //            if (rect.contains(eventX, eventY))
 //                setText("");

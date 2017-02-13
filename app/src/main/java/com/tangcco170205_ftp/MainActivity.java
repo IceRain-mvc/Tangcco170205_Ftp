@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.tangcco170205_ftp.service.MyService;
+import com.tangcco170205_ftp.service.CallUploadService;
 import com.tangcco170205_ftp.utils.AudioRecoderUtils;
 import com.tangcco170205_ftp.utils.TimeUtils;
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void start(View view) {
         mAudioRecoderUtils.startRecord();
-        Intent intent = new Intent(this, MyService.class);
+        Intent intent = new Intent(this, CallUploadService.class);
         startService(intent);
 
     }

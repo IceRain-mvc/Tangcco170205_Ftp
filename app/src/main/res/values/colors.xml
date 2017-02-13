@@ -12,4 +12,5 @@
     <color name="mt_purple">#D667CD</color>
     <color name="mt_yellow">#FCAB53</color>
     <color name="deepyellow">#FF6600</color>
+    <color name="grid_item_bg_color_normal">#fff8f8f8</color>
 </resources>
