@@ -4,11 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.GridView;
 
 import com.tangcco170205_ftp.R;
@@ -18,7 +23,6 @@ import com.tangcco170205_ftp.bean.EventBusBean;
 import com.tangcco170205_ftp.db.DBHelper;
 import com.tangcco170205_ftp.listener.OnClickMainFABListener;
 import com.tangcco170205_ftp.listener.OnMakeSnackbar;
-import com.tangcco170205_ftp.listener.OnRecyclerItemClickListener;
 
 import java.util.List;
 
@@ -28,15 +32,18 @@ import static butterknife.ButterKnife.findById;
 
 
 /**
- * Created by katsuyagoto on 15/06/18.
+ * Created by cuilibao on 17/02/14.
  */
-public class HomeFragment extends Fragment implements OnClickMainFABListener, OnRecyclerItemClickListener {
+public class HomeFragment extends Fragment implements OnClickMainFABListener{
 
     private static final int REQUEST_CREATE_TASK_ACTIVITY = 1000;
 
     private OnMakeSnackbar mOnMakeSnackbar;
     private GridView mGridView;
     private DBHelper dbHelper;
+    private List<AllDataBean> queryAll;
+    private AllDataAdapter adapter;
+    private EditText searchEditText;
 
     public HomeFragment() {
     }
@@ -62,16 +69,30 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener, On
         return view;
     }
 
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            adapter = new AllDataAdapter(queryAll);
+            mGridView.setAdapter(adapter);
+        }
+    };
+    Runnable runnableQuery = new Runnable() {
+        public void run() {
+            dbHelper = new DBHelper(getContext());
+            queryAll = dbHelper.queryAll();
+            mHandler.sendEmptyMessage(0);
+        }
+    };
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mGridView = findById(view, R.id.gridview);
-        dbHelper = new DBHelper(getContext());
-        List<AllDataBean> queryAll = dbHelper.queryAll();
-        AllDataAdapter adapter = new AllDataAdapter(queryAll, this);
-        if (mGridView != null) {
-            mGridView.setAdapter(adapter);
-        }
+        searchEditText = findById(view, R.id.searchEditText);
+        new Thread(runnableQuery).start();
+
+
 //        RecyclerView recyclerView = findById(view, R.id.home_recycle_view);
 //        recyclerView.addItemDecoration(
 //                new DividerItemDecoration(FloatUtils.getDrawableResource(getActivity(), R.drawable.line)));
@@ -80,6 +101,31 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener, On
 //        recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.setHasFixedSize(true);
 //        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        initSearchListener();
+    }
+
+    private void initSearchListener() {
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String result = s.toString();
+                //数据库搜索
+                List<AllDataBean> dataBeanList = dbHelper.queryByXXX(result);
+                adapter = new AllDataAdapter(dataBeanList);
+                mGridView.setAdapter(adapter);
+            }
+        });
     }
 
 
@@ -141,8 +187,4 @@ public class HomeFragment extends Fragment implements OnClickMainFABListener, On
 
     }
 
-    @Override
-    public void onClickRecyclerItem(View v, int position) {
-
-    }
 }

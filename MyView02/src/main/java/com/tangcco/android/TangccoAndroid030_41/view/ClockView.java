@@ -14,7 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by wuli on 17/2/11.
+ * Created by cuilibao on 17/2/13.
  */
 public class ClockView extends View {
     private Paint circlePaint,dialPaint,numberPaint;
@@ -32,7 +32,10 @@ public class ClockView extends View {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if(msg.what==0){
-                invalidate();
+                //更新视图
+                invalidate();//UI
+                //postInvalidate();//子线程
+
             }
         }
     };
@@ -44,7 +47,7 @@ public class ClockView extends View {
 
     private void initPaint(){
         //刻盘圆，小时刻度，时针和分针的画笔
-        circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);//反锯齿
         circlePaint.setColor(Color.BLACK);
         circlePaint.setStyle(Paint.Style.STROKE);
         circlePaint.setStrokeWidth(10);
@@ -95,6 +98,10 @@ public class ClockView extends View {
         canvas.drawCircle(circleX,circleY,5,circlePaint);
     }
 
+    /**
+     * 圆盘
+     * @param canvas
+     */
     private void drawCircle(Canvas canvas){
         canvas.drawCircle(circleX,circleY,circleRadius,circlePaint);
     }

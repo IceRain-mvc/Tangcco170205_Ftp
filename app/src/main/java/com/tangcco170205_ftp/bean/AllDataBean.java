@@ -1,82 +1,85 @@
 package com.tangcco170205_ftp.bean;
 
 /**
- * Created by Administrator on 2017/2/13.
+ * Created by Administrator on 2017/2/14.
  */
 
 public class AllDataBean {
 
-    /**
-     * title : 教会真理
-     * actor : 杨培兹
-     * director : 基督教会
-     * category : 219,36//属于哪个主题
-     * movid : 2169
-     * click : 15452
-     * pic : http://img.tv.ziyuan.jidu.tv:8081/upload/image/movie/20150110/80db3921c0c36377.jpg
-     */
 
-    private String title;
-    private String actor;
-    private String director;
-    private String category;
-    private int movid;
-    private int click;
-    private String pic;
 
-    public String getTitle() {
-        return title;
-    }
+        /**
+         * title : 教会真理
+         * actor : 杨培兹
+         * director : 基督教会
+         * category : 219,36//属于哪个主题
+         * movid : 2169
+         * click : 15452
+         * pic : http://img.tv.ziyuan.jidu.tv:8081/upload/image/movie/20150110/80db3921c0c36377.jpg
+         */
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+        private String title;
+        private String actor;
+        private String director;
+        private String category;
+        private int movid;
+        private int click;
+        private String pic;
 
-    public String getActor() {
-        return actor;
-    }
+        public String getTitle() {
+            return title;
+        }
 
-    public void setActor(String actor) {
-        this.actor = actor;
-    }
+        public void setTitle(String title) {
+            this.title = title;
+        }
 
-    public String getDirector() {
-        return director;
-    }
+        public String getActor() {
+            return actor;
+        }
 
-    public void setDirector(String director) {
-        this.director = director;
-    }
+        public void setActor(String actor) {
+            this.actor = actor;
+        }
 
-    public String getCategory() {
-        return category;
-    }
+        public String getDirector() {
+            return director;
+        }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+        public void setDirector(String director) {
+            this.director = director;
+        }
 
-    public int getMovid() {
-        return movid;
-    }
+        public String getCategory() {
+            return category;
+        }
 
-    public void setMovid(int movid) {
-        this.movid = movid;
-    }
+        public void setCategory(String category) {
+            this.category = category;
+        }
 
-    public int getClick() {
-        return click;
-    }
+        public int getMovid() {
+            return movid;
+        }
 
-    public void setClick(int click) {
-        this.click = click;
-    }
+        public void setMovid(int movid) {
+            this.movid = movid;
+        }
 
-    public String getPic() {
-        return pic;
-    }
+        public int getClick() {
+            return click;
+        }
 
-    public void setPic(String pic) {
-        this.pic = pic;
-    }
+        public void setClick(int click) {
+            this.click = click;
+        }
+
+        public String getPic() {
+            return pic;
+        }
+
+        public void setPic(String pic) {
+            this.pic = pic;
+        }
+
 }

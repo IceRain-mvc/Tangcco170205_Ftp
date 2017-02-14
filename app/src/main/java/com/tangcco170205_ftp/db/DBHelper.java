@@ -19,6 +19,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static int DBVERSON = 1;
     private static String TABLENAME = "alldata";
     private final SQLiteDatabase db;
+    private IQueryAllData iQueryAllData;
 
     public DBHelper(Context context) {
         super(context, "alldata.db", null, DBVERSON);
@@ -98,12 +99,62 @@ public class DBHelper extends SQLiteOpenHelper {
                             break;
                     }
                 }
-                    dataBeanList.add(allDataBean);
+                dataBeanList.add(allDataBean);
+//                iQueryAllData.queryAll(allDataBean);
             }
             db.setTransactionSuccessful();
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
+            db.endTransaction();
+        }
+
+        return dataBeanList;
+    }
+
+    public List<AllDataBean> queryByXXX(String name) {
+        List<AllDataBean> dataBeanList = new ArrayList<>();
+        db.beginTransaction();
+        try {
+            String sql  = "select * from " + TABLENAME+
+                    " where title like ? or actor like ? or director like ? or category like ?";
+            String [] selectionArgs  = new String[]{"%" + name + "%",
+                    "%" + name + "%",
+                    "%" + name + "%",
+                    "%" + name + "%"};
+            Cursor cursor = db.rawQuery(sql, selectionArgs);            while (cursor.moveToNext()) {
+                AllDataBean allDataBean = new AllDataBean();
+
+                //cursor.getColumnCount()-->列数
+                for (int i = 0; i < cursor.getColumnCount(); i++) {
+                    String columnName = cursor.getColumnName(i);
+                    switch (columnName) {
+                        case "title":
+                            allDataBean.setTitle(cursor.getString(i));
+                            break;
+                        case "actor":
+                            allDataBean.setActor(cursor.getString(i));
+                            break;
+                        case "director":
+                            allDataBean.setDirector(cursor.getString(i));
+                            break;
+                        case "category":
+                            allDataBean.setCategory(cursor.getString(i));
+                            break;
+                        case "movid":
+                            allDataBean.setMovid(cursor.getInt(i));
+                            break;
+                        case "pic":
+                            allDataBean.setPic(cursor.getString(i));
+                            break;
+                    }
+                }
+                dataBeanList.add(allDataBean);
+            }
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             db.endTransaction();
         }
 
@@ -121,8 +172,16 @@ public class DBHelper extends SQLiteOpenHelper {
             db.setTransactionSuccessful();
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             db.endTransaction();
         }
+    }
+
+    public void setQueryAllData(IQueryAllData iQueryAllData) {
+        this.iQueryAllData = iQueryAllData;
+    }
+
+    public interface IQueryAllData {
+        void queryAll(AllDataBean allDataBean);
     }
 }

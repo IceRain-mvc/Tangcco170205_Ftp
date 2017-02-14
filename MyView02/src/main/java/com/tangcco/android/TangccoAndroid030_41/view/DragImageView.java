@@ -3,16 +3,11 @@ package com.tangcco.android.TangccoAndroid030_41.view;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.os.AsyncTask;
-import android.text.method.MovementMethod;
 import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
@@ -26,7 +21,7 @@ import android.widget.ImageView;
  * invalidate方法：用于刷新当前控件,
  * 
  * 
- * @author zhangjia
+ * @author cuilibao
  * 
  */
 public class DragImageView extends ImageView {
@@ -53,7 +48,7 @@ public class DragImageView extends ImageView {
 	/**
 	 * 模式 NONE：无 DRAG：拖拽. ZOOM:缩放
 	 * 
-	 * @author zhangjia
+	 * @author cuilibao
 	 * 
 	 */
 	private enum MODE {
@@ -415,7 +410,7 @@ public class DragImageView extends ImageView {
 				right = Math.min(right, start_Right);
 				bottom = Math.min(bottom, start_Bottom);
                 Log.e("jj", "top="+top+",bottom="+bottom+",left="+left+",right="+right);
-				onProgressUpdate(new Integer[] { left, top, right, bottom });
+				publishProgress(left, top, right, bottom);
 				try {
 					Thread.sleep(10);
 				} catch (InterruptedException e) {
@@ -432,6 +427,7 @@ public class DragImageView extends ImageView {
 			mActivity.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
+					//给ImageView布局
 					setFrame(values[0], values[1], values[2], values[3]);
 				}
 			});

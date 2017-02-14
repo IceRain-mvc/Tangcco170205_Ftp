@@ -19,7 +19,7 @@ public class Constants {
     private static boolean sdCardExist;
     private static String dirName;
     public final static String BASEURL = "http://webapi.tv.cnfuyin.net:7744/index.php";
-    public final static String ALLDATA = "?m=tool";
+    public final static String ALLDATA = BASEURL+"?m=tool";
 
 
 

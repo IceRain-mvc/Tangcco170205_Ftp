@@ -9,7 +9,7 @@
     </style>
 
     <style name="StartStyle" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/start_window</item>
+
     </style>
 
     <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">

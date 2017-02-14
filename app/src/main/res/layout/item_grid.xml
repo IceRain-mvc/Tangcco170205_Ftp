@@ -1,46 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="100.0dip"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bg_grid_color_selector"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginTop="2dp"
+    card_view:cardBackgroundColor="@android:color/holo_orange_dark"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="2dp">
 
-    <ImageView
-        android:id="@+id/movImage6"
-        android:layout_width="100dp"
-        android:layout_height="135.0dp"
-        android:src="@drawable/placeholder" />
-
-    <TextView
-        android:id="@+id/movNameText6"
-        style="@style/app_text_24_666666"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="6.0dip"
-        android:layout_marginRight="6.0dip"
-        android:layout_marginTop="3.0dip"
+    <LinearLayout
+        android:layout_width="100.0dip"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_grid_color_selector"
         android:gravity="center"
-        android:maxLines="1"
-        android:text="唐朝人" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/movActorText6"
-        style="@style/app_text_18_999999"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="6.0dip"
-        android:layout_marginRight="6.0dip"
-        android:maxLines="1"
-        android:text="唐朝人唐朝人唐朝人唐朝人唐朝人" />
+        <ImageView
+            android:id="@+id/movImage6"
+            android:layout_width="100dp"
+            android:layout_height="135dp"
+            android:src="@drawable/placeholder" />
 
-    <TextView
-        android:id="@+id/movAreaText6"
-        style="@style/app_text_18_999999"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="6.0dip"
-        android:layout_marginRight="6.0dip"
-        android:maxLines="1"
-        android:text="唐朝人唐朝人唐朝人唐朝人唐朝人" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/movNameText6"
+            style="@style/app_text_24_666666"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6.0dip"
+            android:layout_marginRight="6.0dip"
+            android:layout_marginTop="3.0dip"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="唐朝人" />
+
+        <TextView
+            android:id="@+id/movActorText6"
+            style="@style/app_text_18_999999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6.0dip"
+            android:layout_marginRight="6.0dip"
+            android:maxLines="1"
+            android:text="唐朝人唐朝人唐朝人唐朝人唐朝人" />
+
+        <TextView
+            android:id="@+id/movAreaText6"
+            style="@style/app_text_18_999999"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6.0dip"
+            android:layout_marginRight="6.0dip"
+            android:maxLines="1"
+            android:text="唐朝人唐朝人唐朝人唐朝人唐朝人" />
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

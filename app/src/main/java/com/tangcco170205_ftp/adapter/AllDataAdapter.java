@@ -34,17 +34,19 @@ public class AllDataAdapter extends BaseAdapter{
 
     private static OnRecyclerItemClickListener sOnRecyclerItemClickListener;
 
-    public AllDataAdapter(List<AllDataBean> groups,
-                          OnRecyclerItemClickListener onRecyclerItemClickListener) {
+    public AllDataAdapter(List<AllDataBean> groups
+                          ) {
         super();
         mData = groups;
-        sOnRecyclerItemClickListener = onRecyclerItemClickListener;
+//        sOnRecyclerItemClickListener = onRecyclerItemClickListener;
     }
+
+
 
 
     @Override
     public int getCount() {
-        return  12;
+        return mData.size();
     }
 
     public AllDataBean getItem(int position) {
